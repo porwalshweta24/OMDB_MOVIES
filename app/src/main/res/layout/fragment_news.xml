@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+
+    <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/primaryDark"
+        android:orientation="vertical">
+
+        <!-- TODO: Initialize Fragment. -->
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.maveric.imdb.ui.news.NewsViewModel" />
+
+        <variable
+            name="sharedData"
+            type="com.maveric.imdb.ui.base.ApplicationViewModel" />
+
+    </data>
+
+</layout>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_general"
+        android:layout_marginTop="@dimen/margin_small"
+        android:layout_marginEnd="@dimen/margin_general"
+        android:layout_marginBottom="@dimen/margin_small"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardCornerRadius="@dimen/card_corners"
+        app:cardElevation="@dimen/card_elevation"
+        bind:click_double_check="@{(view) -> data.onMovieClick(item)}"
+        bind:selectable_ripple="@{true}">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/itemMoviePoster"
+                android:layout_width="67dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="@dimen/margin_small"
+                android:layout_marginTop="@dimen/margin_small"
+                android:layout_marginBottom="@dimen/margin_small"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                bind:image_error="@{@drawable/ic_error_placeholder}"
+                bind:image_placeholder="@{@drawable/ic_default_placeholder}"
+                bind:image_uri="@{item.posterUrl}"
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/itemMovieTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_small"
+                android:layout_marginTop="@dimen/margin_small"
+                android:layout_marginEnd="@dimen/margin_small"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif-medium"
+                android:maxLines="2"
+                android:text="@{item.title}"
+                android:textColor="@color/accent"
+                android:textSize="@dimen/text_size_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/itemMoviePoster"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@tools:sample/lorem/random" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/itemMovieDescription"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_small"
+                android:layout_marginTop="@dimen/margin_tiny"
+                android:layout_marginEnd="@dimen/margin_small"
+                android:layout_marginBottom="@dimen/margin_small"
+                android:ellipsize="end"
+                android:lines="1"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text="@{item.type == MovieType.SERIES ? @string/omdb_type_series : @string/omdb_type_movie}"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/text_size_secondary"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/itemMoviePoster"
+                app:layout_constraintTop_toBottomOf="@+id/itemMovieTitle"
+                app:layout_constraintVertical_bias="0"
+                tools:text="Movie" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/itemMovieYear"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_small"
+                android:layout_marginEnd="@dimen/margin_small"
+                android:layout_marginBottom="@dimen/margin_small"
+                android:ellipsize="end"
+                android:lines="1"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text="@{item.year}"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/text_size_secondary"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/itemMoviePoster"
+                app:layout_constraintTop_toBottomOf="@+id/itemMovieDescription"
+                app:layout_constraintVertical_bias="0"
+                bind:gone_if_null_or_blank="@{item.year}"
+                tools:text="@tools:sample/date/ddmmyy" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <data>
+
+        <import type="com.maveric.imdb.ui.movies.helper.MovieType" />
+
+        <variable
+            name="data"
+            type="com.maveric.imdb.ui.movies.MoviesViewModel" />
+
+        <variable
+            name="item"
+            type="com.maveric.imdb.ui.movies.helper.MovieItem" />
+
+    </data>
+
+</layout>
